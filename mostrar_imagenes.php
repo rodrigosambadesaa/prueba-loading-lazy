@@ -52,7 +52,7 @@ function generarURLImagen($anchura, $altura) {
 <body>
     <header>
         <h1>Mostrando <?php echo $num_imagenes; ?> imágenes <?php echo $lazy ? 'con' : 'sin'; ?> loading="lazy"</h1>
-        <p><a href="formulario.php">Volver al formulario</a></p>
+        <p><a href="index.php">Volver al formulario</a></p>
     </header>
     <div class="grid">
         <?php
