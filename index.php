@@ -7,7 +7,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_POST['num_imagenes'])) {
         $num_imagenes = $_POST['num_imagenes'];
         // Limpiar entrada y validar que es un entero positivo
-        if (filter_var($num_imagenes, FILTER_VALIDATE_INT, array("options" => array("min_range"=>1)))) {
+        if (filter_var($num_imagenes, FILTER_VALIDATE_INT, array("options" => array("min_range" => 1)))) {
             // Redirigir a la página correspondiente
             if (isset($_POST['lazy'])) {
                 header("Location: mostrar_imagenes.php?lazy=1&num_imagenes=$num_imagenes");
@@ -26,6 +26,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <title>Formulario de Imágenes</title>
@@ -38,16 +39,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             flex-direction: column;
             align-items: center;
         }
+
         form {
             margin-top: 50px;
         }
+
         input[type="number"] {
             padding: 5px;
             margin-right: 10px;
         }
+
         .error {
             color: red;
         }
+
         button {
             padding: 5px 10px;
             background-color: #007acc;
@@ -67,15 +72,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     </script>
 </head>
+
 <body>
     <h1>Selecciona el número de imágenes</h1>
-    <form name="formImagenes" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post" onsubmit="return validarFormulario();">
-        <input type="number" name="num_imagenes" value="<?php echo htmlspecialchars($num_imagenes); ?>" min="1" required>
+    <form name="formImagenes" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post"
+        onsubmit="return validarFormulario();">
+        <input type="number" name="num_imagenes" value="<?php echo htmlspecialchars($num_imagenes); ?>" min="1"
+            required>
         <label>
             <input type="checkbox" name="lazy" checked> Usar loading="lazy"
         </label>
         <button type="submit">Mostrar Imágenes</button>
     </form>
-    <?php if ($error != '') { echo "<p class='error'>$error</p>"; } ?>
+    <?php if ($error != '') {
+        echo "<p class='error'>$error</p>";
+    } ?>
 </body>
+
 </html>

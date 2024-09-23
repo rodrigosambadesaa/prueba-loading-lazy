@@ -9,7 +9,8 @@ if ($num_imagenes <= 0) {
 }
 
 // Generar URLs de imágenes grandes (usaremos un servicio placeholder)
-function generarURLImagen($anchura, $altura) {
+function generarURLImagen($anchura, $altura)
+{
     // Usaremos picsum.photos para generar imágenes grandes
     return "https://picsum.photos/$anchura/$altura.jpg";
 }
@@ -17,6 +18,7 @@ function generarURLImagen($anchura, $altura) {
 
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <title>Imágenes <?php echo $lazy ? 'con' : 'sin'; ?> loading="lazy"</title>
@@ -27,28 +29,33 @@ function generarURLImagen($anchura, $altura) {
             margin: 0;
             padding: 0;
         }
+
         .grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
             grid-gap: 10px;
             padding: 10px;
         }
+
         .grid img {
             width: 100%;
             height: auto;
         }
+
         header {
             background-color: #007acc;
             color: white;
             padding: 10px;
             text-align: center;
         }
+
         a {
             color: white;
             text-decoration: underline;
         }
     </style>
 </head>
+
 <body>
     <header>
         <h1>Mostrando <?php echo $num_imagenes; ?> imágenes <?php echo $lazy ? 'con' : 'sin'; ?> loading="lazy"</h1>
@@ -65,4 +72,5 @@ function generarURLImagen($anchura, $altura) {
         ?>
     </div>
 </body>
+
 </html>
