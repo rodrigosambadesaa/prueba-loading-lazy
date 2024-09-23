@@ -13,9 +13,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 header("Location: mostrar_imagenes.php?lazy=1&num_imagenes=$num_imagenes");
             } else {
                 // Limitar a 600 si no se selecciona lazy
-                if ($num_imagenes > 600) {
-                    $num_imagenes = 600;
-                    $error = "Se ha limitado el número de imágenes a 600 por razones de rendimiento del servidor.";
+                if ($num_imagenes > 250) {
+                    $num_imagenes = 250;
                 }
                 header("Location: mostrar_imagenes.php?lazy=0&num_imagenes=$num_imagenes");
             }
