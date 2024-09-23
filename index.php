@@ -12,7 +12,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if (isset($_POST['lazy'])) {
                 header("Location: mostrar_imagenes.php?lazy=1&num_imagenes=$num_imagenes");
             } else {
-                // Limitar a 600 si no se selecciona lazy
+                // Limitar a 250 si no se selecciona lazy
                 if ($num_imagenes > 250) {
                     $num_imagenes = 250;
                 }
