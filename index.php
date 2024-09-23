@@ -6,17 +6,22 @@ $num_imagenes = '';
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_POST['num_imagenes'])) {
         $num_imagenes = $_POST['num_imagenes'];
-        // Limpiar entrada y validar que es un entero positivo
-        if (filter_var($num_imagenes, FILTER_VALIDATE_INT, array("options" => array("min_range" => 1)))) {
-            // Redirigir a la página correspondiente
+        // Limpiar entrada y validar que es un entero positivo y no mayor que 10000
+        if (filter_var($num_imagenes, FILTER_VALIDATE_INT, array("options" => array("min_range" => 1, "max_range" => 10000)))) {
+            // Verificar si la opción lazy está seleccionada
             if (isset($_POST['lazy'])) {
                 header("Location: mostrar_imagenes.php?lazy=1&num_imagenes=$num_imagenes");
             } else {
+                // Limitar a 600 si no se selecciona lazy
+                if ($num_imagenes > 600) {
+                    $num_imagenes = 600;
+                    $error = "Se ha limitado el número de imágenes a 600 por razones de rendimiento del servidor.";
+                }
                 header("Location: mostrar_imagenes.php?lazy=0&num_imagenes=$num_imagenes");
             }
             exit();
         } else {
-            $error = "Por favor, introduce un número entero positivo.";
+            $error = "Por favor, introduce un número entero positivo no mayor que 10000.";
         }
     } else {
         $error = "Por favor, introduce el número de imágenes.";
@@ -78,7 +83,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <form name="formImagenes" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post"
         onsubmit="return validarFormulario();">
         <input type="number" name="num_imagenes" value="<?php echo htmlspecialchars($num_imagenes); ?>" min="1"
-            required>
+            max="10000" required>
         <label>
             <input type="checkbox" name="lazy" checked> Usar loading="lazy"
         </label>
